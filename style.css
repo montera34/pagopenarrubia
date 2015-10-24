@@ -1,0 +1,76 @@
+.hide-text {
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+}
+#pre {
+	position: fixed;
+	display: block;
+	z-index: 999;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	text-align: center;
+}
+#pre:before {
+	content: '';
+	display: inline-block;
+	vertical-align: middle;
+	height: 100%;
+}
+.pre-inner {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: left;
+}
+#brand {
+	height: 225px;
+	background: transparent url(images/ppnr-logo.png) no-repeat center top;
+}
+.nav-menu {
+	font-family: Znikomit, sans-serif;
+	text-transform: uppercase;
+}
+
+
+.container-full {
+	width: 100%;
+	margin: 0 auto;
+}
+.inner-bg {
+	background-color: rgba(0,0,0,0.35);
+	min-height: 265px;
+}
+.section {
+	background-size: cover;
+	padding: 0;
+}
+
+
+#s1 {
+	background-image: url(images/01.jpg);
+}
+#s2 {
+	background-image: url(images/02.jpg);
+}
+#s3 {
+	background-image: url(images/03.jpg);
+}
+#s4 {
+	background-image: url(images/04.jpg);
+}
+#s5 {
+	background-image: url(images/05.jpg);
+}
+#s6 {
+	background-image: url(images/06.jpg);
+}
+#s7 {
+	background-image: url(images/07.jpg);
+}
+
+.section-text {
+	column-count: 2;
+	-webkit-column-count: 2;
+	-moz-column-count: 2;
+}

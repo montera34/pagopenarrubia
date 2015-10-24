@@ -31,6 +31,17 @@
 	font-family: Znikomit, sans-serif;
 	text-transform: uppercase;
 }
+.nav-menu .active:before {
+	content: " ";
+	float: left;
+	width: 20px;
+	height: 20px;
+	background: transparent url(images/ppnr-icon.png) no-repeat 0px 2px;
+	margin-left: -20px;
+}
+.nav-menu .active {
+	font-weight: bold;
+}
 
 
 .container-full {

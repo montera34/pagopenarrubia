@@ -8,32 +8,14 @@
 	margin: 0;
 	padding: 0;
 }
-#pre {}
-.pnr-position {
-	display: block;
-	text-align: center;
-}
-.pnr-fixed {
-	z-index: 999;
-	position: fixed;
-	top: 0;
+#pre {
+	display: table;
 	height: 100%;
 	width: 100%;
 }
-.pnr-absolute {
-	position: absolute;
-	z-index: 998;
-}
-.pnr-position:before {
-	content: '';
-	display: inline-block;
+.pre-inner {
+	display: table-cell;
 	vertical-align: middle;
-	height: 100%;
-}
-.pnr-position-inner {
-	display: inline-block;
-	vertical-align: middle;
-	text-align: left;
 }
 #brand {
 	height: 225px;

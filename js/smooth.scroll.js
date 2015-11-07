@@ -39,4 +39,31 @@ $(document).ready(function() {
 		pnrScroll(element,hashNow);
 	});
 
+	// keypress events
+	$(document).keydown(function(e) {
+		switch(e.which) {
+//			case 37: // left
+//			break;
+
+			case 38: // up
+				prevHash = $(".active").prev().children('a').get(0).getAttribute('href');
+				prevElement = document.getElementById($(".active").prev().children("a").get(0).getAttribute('data-menuanchor'));
+				pnrScroll(prevElement,prevHash);
+		
+			break;
+
+//			case 39: // right
+//			break;
+
+			case 40: // down
+				nextHash = $(".active").next().children('a').get(0).getAttribute('href');
+				nextElement = document.getElementById($(".active").next().children("a").get(0).getAttribute('data-menuanchor'));
+				pnrScroll(nextElement,nextHash);	
+			break;
+
+			default: return; // exit this handler for other keys
+		}
+		e.preventDefault(); // prevent the default action (scroll / move caret)
+	});
+
 });

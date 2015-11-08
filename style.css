@@ -25,6 +25,9 @@
 	font-family: Znikomit, sans-serif;
 	text-transform: uppercase;
 }
+.nav-menu a:focus {
+	outline: none;
+}
 .nav-menu .active:before {
 	content: " ";
 	float: left;

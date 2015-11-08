@@ -1,25 +1,25 @@
 var win = $(window);
 var winHeight = win.height();
-var hashNow = location.hash;
+var hashIni = location.hash;
 var toAnimate = $('html, body');
+
+// change hash and active element function
+function changeHash(hash) {
+	window.location.hash = hash;
+	$(".active").removeClass("active");
+	$("a[href='#"+hash+"']").parent().addClass('active');
+}
 
 // scroll function
 function pnrScroll(el,hash) {
 	hash = hash.replace(/^#/,"");
-	var elOffset = $(el).offset().top;
-	var elHeight = $(el).height();
+	elOffset = $(el).offset().top;
+	elHeight = $(el).height();
 	var offset = elOffset + (elHeight /2) - (winHeight /2);
 	// animate
 	toAnimate.animate({
 		scrollTop: offset
-		}, 500, function(){
-			// when done, add hash to url
-			// (default click behaviour)
-			window.location.hash = hash;
-			$(".active").removeClass("active");
-			$("a[href='#"+hash+"']").parent().addClass('active');
-		}
-	);
+		}, 500, changeHash(hash));
 };
 
 $(document).ready(function() {
@@ -34,31 +34,74 @@ $(document).ready(function() {
 
 	// window load event
 	win.load(function() {
-		if ( hashNow == '' ) { hashNow = '#inicio'; }
-		element = document.getElementById($("a[href='"+hashNow+"']").get(0).getAttribute('data-menuanchor'));
-		pnrScroll(element,hashNow);
+		if ( hashIni == '' ) { hashIni = '#inicio'; }
+		element = document.getElementById($("a[href='"+hashIni+"']").get(0).getAttribute('data-menuanchor'));
+		pnrScroll(element,hashIni);
+	});
+
+	// window scroll event
+	win.scroll(function () {
+
+		// current hash and band
+		hashNow = location.hash.replace(/^#/,"");
+		el = document.getElementById($("a[href='#"+hashNow+"']").get(0).getAttribute('data-menuanchor'));
+		elOffset = $(el).offset().top;
+
+		// prev hash and band
+		if ( hashNow === 'inicio' ) {
+			prevHash = "inicio";
+			prevEl = document.getElementById($("a[href='#"+hashNow+"']").get(0).getAttribute('data-menuanchor'));
+		} else {
+			prevHash = $("a[href='#"+hashNow+"']").parent().prev().children('a').get(0).getAttribute('href');
+			prevEl = document.getElementById($("a[href='#"+hashNow+"']").parent().prev().children("a").get(0).getAttribute('data-menuanchor'));
+		}
+
+		// next hash and band
+		if ( hashNow === 'contacto' ) {
+			nextHash = "contacto";
+			nextEl = document.getElementById($("a[href='#"+hashNow+"']").get(0).getAttribute('data-menuanchor'));
+		} else {
+			nextHash = $("a[href='#"+hashNow+"']").parent().next().children('a').get(0).getAttribute('href');
+			nextEl = document.getElementById($("a[href='#"+hashNow+"']").parent().next().children("a").get(0).getAttribute('data-menuanchor'));
+		}
+		nextElOffset = $(nextEl).offset().top;
+
+		var offsetToPrev = elOffset - (winHeight /2);
+		var offsetToNext = nextElOffset - (winHeight /2);
+		if ( win.scrollTop() < offsetToPrev ) {
+			prevHash = prevHash.replace(/^#/,"");
+			changeHash(prevHash);
+		}
+		if ( win.scrollTop() > offsetToNext ) {
+			nextHash = nextHash.replace(/^#/,"");
+			changeHash(nextHash);
+		}
 	});
 
 	// keypress events
 	$(document).keydown(function(e) {
+		hashNow = location.hash;
 		switch(e.which) {
 //			case 37: // left
 //			break;
 
 			case 38: // up
+			if ( hashNow != '#inicio' ) {
 				prevHash = $(".active").prev().children('a').get(0).getAttribute('href');
 				prevElement = document.getElementById($(".active").prev().children("a").get(0).getAttribute('data-menuanchor'));
 				pnrScroll(prevElement,prevHash);
-		
+			}
 			break;
 
 //			case 39: // right
 //			break;
 
 			case 40: // down
+			if ( hashNow != '#contacto' ) {
 				nextHash = $(".active").next().children('a').get(0).getAttribute('href');
 				nextElement = document.getElementById($(".active").next().children("a").get(0).getAttribute('data-menuanchor'));
 				pnrScroll(nextElement,nextHash);	
+			}
 			break;
 
 			default: return; // exit this handler for other keys

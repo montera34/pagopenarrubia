@@ -3,12 +3,25 @@ var winHeight = win.height();
 var hashIni = location.hash;
 var toAnimate = $('html, body');
 
+// fadein current band and fadeout the rest
+function showBandContent(hash) {
+	console.log(hash);
+	$("#pre").addClass("ontop");
+	elId = $("a[href='#"+hash+"']").get(0).getAttribute('data-menuanchor');
+	$(".inner-bg").fadeOut();
+	$("#"+elId+" .inner-bg").fadeIn(1000,function(){
+		$("#pre").delay(2000).removeClass("ontop");
+		}
+	);
+}
+
 // change hash and active element function
 function changeHash(hash) {
 	hash = hash.replace(/^#/,"");
 	window.location.hash = hash;
 	$(".active").removeClass("active");
 	$("a[href='#"+hash+"']").parent().addClass('active');
+	showBandContent(hash);
 }
 
 // scroll function
@@ -18,7 +31,6 @@ function pnrScroll(el,hash,eventType) {
 	elHeight = $(el).height();
 	if ( eventType == 'resize' ) { winHeight = $(window).height(); }
 	offset = elOffset + (elHeight /2) - (winHeight /2);
-console.log(winHeight);
 	// animate
 	if ( eventType == 'noFnAfter' || eventType == 'resize' ) {
 		toAnimate.animate({
@@ -32,6 +44,9 @@ console.log(winHeight);
 };
 
 $(document).ready(function() {
+
+	// hide bands
+	$(".inner-bg").hide();
 
 	// click event
 	$("#pre a[href^='#']").on('click', function(e) {
@@ -64,7 +79,6 @@ $(document).ready(function() {
 
 	// window scroll event
 	win.scroll(function () {
-
 		// current hash and band
 		hashNow = location.hash;
 		el = document.getElementById($("a[href='"+hashNow+"']").get(0).getAttribute('data-menuanchor'));
@@ -91,10 +105,10 @@ $(document).ready(function() {
 
 		var offsetToPrev = elOffset - (winHeight /2);
 		var offsetToNext = nextElOffset - (winHeight /2);
-		if ( win.scrollTop() < offsetToPrev ) {
+		if ( win.scrollTop() < offsetToPrev && prevHash !== hashNow ) {
 			changeHash(prevHash);
 		}
-		if ( win.scrollTop() > offsetToNext ) {
+		if ( win.scrollTop() > offsetToNext && nextHash !== hashNow ) {
 			changeHash(nextHash);
 		}
 	});

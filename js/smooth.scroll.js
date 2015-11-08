@@ -5,21 +5,30 @@ var toAnimate = $('html, body');
 
 // change hash and active element function
 function changeHash(hash) {
+	hash = hash.replace(/^#/,"");
 	window.location.hash = hash;
 	$(".active").removeClass("active");
 	$("a[href='#"+hash+"']").parent().addClass('active');
 }
 
 // scroll function
-function pnrScroll(el,hash) {
+function pnrScroll(el,hash,eventType) {
 	hash = hash.replace(/^#/,"");
 	elOffset = $(el).offset().top;
 	elHeight = $(el).height();
-	var offset = elOffset + (elHeight /2) - (winHeight /2);
+	if ( eventType == 'resize' ) { winHeight = $(window).height(); }
+	offset = elOffset + (elHeight /2) - (winHeight /2);
+console.log(winHeight);
 	// animate
-	toAnimate.animate({
-		scrollTop: offset
-		}, 500, changeHash(hash));
+	if ( eventType == 'noFnAfter' || eventType == 'resize' ) {
+		toAnimate.animate({
+			scrollTop: offset
+			}, 500);
+	} else {
+		toAnimate.animate({
+			scrollTop: offset
+			}, 500, changeHash(hash));
+	}
 };
 
 $(document).ready(function() {
@@ -29,7 +38,7 @@ $(document).ready(function() {
 		e.preventDefault();
 		element = document.getElementById(e.target.getAttribute('data-menuanchor'));
 		hash = e.target.getAttribute('href');
-		pnrScroll(element,hash);
+		pnrScroll(element,hash,"noFnAfter");
 	});
 
 	// window load event
@@ -39,41 +48,53 @@ $(document).ready(function() {
 		pnrScroll(element,hashIni);
 	});
 
+	// window resize event
+	$(window).resize(function() {
+		if(this.resizeTO) clearTimeout(this.resizeTO);
+		this.resizeTO = setTimeout(function() {
+			$(this).trigger('resizeEnd');
+		}, 500);
+	});
+	$(window).bind("resizeEnd", function() {
+		hashNow = location.hash;
+		el = document.getElementById($("a[href='"+hashNow+"']").get(0).getAttribute('data-menuanchor'));
+		pnrScroll(el,hashNow,"resize");
+
+	});
+
 	// window scroll event
 	win.scroll(function () {
 
 		// current hash and band
-		hashNow = location.hash.replace(/^#/,"");
-		el = document.getElementById($("a[href='#"+hashNow+"']").get(0).getAttribute('data-menuanchor'));
+		hashNow = location.hash;
+		el = document.getElementById($("a[href='"+hashNow+"']").get(0).getAttribute('data-menuanchor'));
 		elOffset = $(el).offset().top;
 
 		// prev hash and band
-		if ( hashNow === 'inicio' ) {
-			prevHash = "inicio";
-			prevEl = document.getElementById($("a[href='#"+hashNow+"']").get(0).getAttribute('data-menuanchor'));
+		if ( hashNow === '#inicio' ) {
+			prevHash = "#inicio";
+			prevEl = document.getElementById($("a[href='"+hashNow+"']").get(0).getAttribute('data-menuanchor'));
 		} else {
-			prevHash = $("a[href='#"+hashNow+"']").parent().prev().children('a').get(0).getAttribute('href');
-			prevEl = document.getElementById($("a[href='#"+hashNow+"']").parent().prev().children("a").get(0).getAttribute('data-menuanchor'));
+			prevHash = $("a[href='"+hashNow+"']").parent().prev().children('a').get(0).getAttribute('href');
+			prevEl = document.getElementById($("a[href='"+hashNow+"']").parent().prev().children("a").get(0).getAttribute('data-menuanchor'));
 		}
 
 		// next hash and band
-		if ( hashNow === 'contacto' ) {
-			nextHash = "contacto";
-			nextEl = document.getElementById($("a[href='#"+hashNow+"']").get(0).getAttribute('data-menuanchor'));
+		if ( hashNow === '#contacto' ) {
+			nextHash = "#contacto";
+			nextEl = document.getElementById($("a[href='"+hashNow+"']").get(0).getAttribute('data-menuanchor'));
 		} else {
-			nextHash = $("a[href='#"+hashNow+"']").parent().next().children('a').get(0).getAttribute('href');
-			nextEl = document.getElementById($("a[href='#"+hashNow+"']").parent().next().children("a").get(0).getAttribute('data-menuanchor'));
+			nextHash = $("a[href='"+hashNow+"']").parent().next().children('a').get(0).getAttribute('href');
+			nextEl = document.getElementById($("a[href='"+hashNow+"']").parent().next().children("a").get(0).getAttribute('data-menuanchor'));
 		}
 		nextElOffset = $(nextEl).offset().top;
 
 		var offsetToPrev = elOffset - (winHeight /2);
 		var offsetToNext = nextElOffset - (winHeight /2);
 		if ( win.scrollTop() < offsetToPrev ) {
-			prevHash = prevHash.replace(/^#/,"");
 			changeHash(prevHash);
 		}
 		if ( win.scrollTop() > offsetToNext ) {
-			nextHash = nextHash.replace(/^#/,"");
 			changeHash(nextHash);
 		}
 	});
@@ -89,7 +110,7 @@ $(document).ready(function() {
 			if ( hashNow != '#inicio' ) {
 				prevHash = $(".active").prev().children('a').get(0).getAttribute('href');
 				prevElement = document.getElementById($(".active").prev().children("a").get(0).getAttribute('data-menuanchor'));
-				pnrScroll(prevElement,prevHash);
+				pnrScroll(prevElement,prevHash,"noFnAfter");
 			}
 			break;
 
@@ -100,7 +121,7 @@ $(document).ready(function() {
 			if ( hashNow != '#contacto' ) {
 				nextHash = $(".active").next().children('a').get(0).getAttribute('href');
 				nextElement = document.getElementById($(".active").next().children("a").get(0).getAttribute('data-menuanchor'));
-				pnrScroll(nextElement,nextHash);	
+				pnrScroll(nextElement,nextHash,"noFnAfter");	
 			}
 			break;
 

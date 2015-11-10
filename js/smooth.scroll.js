@@ -5,12 +5,9 @@ var toAnimate = $('html, body');
 
 // fadein current band and fadeout the rest
 function showBandContent(hash) {
-	console.log(hash);
 	elId = $("a[href='#"+hash+"']").get(0).getAttribute('data-menuanchor');
 	$(".section-text").fadeOut();
-	$("#"+elId+" .section-text").fadeIn(1000,function(){
-		}
-	);
+	$("#"+elId+" .section-text").fadeIn(1000);
 }
 
 // change hash and active element function
@@ -111,6 +108,26 @@ $(document).ready(function() {
 		}
 	});
 
+	// mouse wheel events
+	$('html').on('mousewheel', function(event) {
+		// scroll down
+		if ( event.deltaY < 0 ) {
+			if ( hashNow != '#contacto' ) {
+				nextHash = $(".active").next().children('a').get(0).getAttribute('href');
+				nextElement = document.getElementById($(".active").next().children("a").get(0).getAttribute('data-menuanchor'));
+				pnrScroll(nextElement,nextHash,"noFnAfter");	
+			}
+		}
+		// scroll up
+		if ( event.deltaY > 0 ) {
+			if ( hashNow != '#inicio' ) {
+				prevHash = $(".active").prev().children('a').get(0).getAttribute('href');
+				prevElement = document.getElementById($(".active").prev().children("a").get(0).getAttribute('data-menuanchor'));
+				pnrScroll(prevElement,prevHash,"noFnAfter");
+			}
+
+		}
+	});
 	// keypress events
 	$(document).keydown(function(e) {
 		hashNow = location.hash;

@@ -1,6 +1,3 @@
-.ontop {
-	z-index: 1;
-}
 .hide-text {
 	text-indent: 100%;
 	white-space: nowrap;
@@ -10,6 +7,9 @@
 	height: 0;
 	margin: 0;
 	padding: 0;
+}
+.vspace {
+	padding: 25px 0;
 }
 #pre {
 	display: table;
@@ -21,12 +21,17 @@
 	vertical-align: middle;
 }
 #brand {
-	height: 225px;
-	background: transparent url(images/ppnr-logo.png) no-repeat center top;
+	height: 275px;
+	background: transparent url(images/ppnr-logo.png) no-repeat center center/140px auto;
 }
 .nav-menu {
+	margin: 22px 0;
 	font-family: Znikomit, sans-serif;
 	text-transform: uppercase;
+}
+.nav-menu li {
+	margin: 12px 0;
+	white-space: nowrap;
 }
 .nav-menu a:focus {
 	outline: none;
@@ -52,9 +57,11 @@
 	display: table-cell;
 	vertical-align: middle;
 }
-.inner-bg {
+#pre .inner-bg {
 	background-color: rgba(0,0,0,0.35);
-	min-height: 265px;
+}
+.inner-bg {
+	min-height: 275px;
 }
 .section {
 	background-size: cover;
@@ -89,4 +96,8 @@
 	column-count: 2;
 	-webkit-column-count: 2;
 	-moz-column-count: 2;
+	text-align: justify;
+}
+.section-text p {
+	margin: 0 0 1.4em;
 }

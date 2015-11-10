@@ -6,11 +6,9 @@ var toAnimate = $('html, body');
 // fadein current band and fadeout the rest
 function showBandContent(hash) {
 	console.log(hash);
-	$("#pre").addClass("ontop");
 	elId = $("a[href='#"+hash+"']").get(0).getAttribute('data-menuanchor');
-	$(".inner-bg").fadeOut();
-	$("#"+elId+" .inner-bg").fadeIn(1000,function(){
-		$("#pre").delay(2000).removeClass("ontop");
+	$(".section-text").fadeOut();
+	$("#"+elId+" .section-text").fadeIn(1000,function(){
 		}
 	);
 }
@@ -46,7 +44,7 @@ function pnrScroll(el,hash,eventType) {
 $(document).ready(function() {
 
 	// hide bands
-	$(".inner-bg").hide();
+	$(".section-text").hide();
 
 	// click event
 	$("#pre a[href^='#']").on('click', function(e) {

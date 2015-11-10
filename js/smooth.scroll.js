@@ -43,6 +43,11 @@ $(document).ready(function() {
 	// hide bands
 	$(".section-text").hide();
 
+	// Add margin to main container in huge screens
+	if ( win.width() > 1280 ) {
+		$("#fullpage").addClass("height-corrective");
+	}
+
 	// click event
 	$("#pre a[href^='#']").on('click', function(e) {
 		e.preventDefault();

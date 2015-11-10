@@ -14,6 +14,9 @@ html, body {
 .vspace {
 	padding: 25px 0;
 }
+.height-corrective {
+	margin: 300px 0;
+}
 #pre {
 	display: table;
 	height: 100%;
@@ -25,7 +28,7 @@ html, body {
 }
 #brand {
 	height: 275px;
-	background: transparent url(images/ppnr-logo.png) no-repeat center center/140px auto;
+	background: transparent url(images/ppnr-logo.png) no-repeat center center/139px auto;
 }
 .nav-menu {
 	margin: 22px 0;

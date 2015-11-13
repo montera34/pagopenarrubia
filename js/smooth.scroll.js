@@ -75,6 +75,10 @@ $(document).ready(function() {
 		el = document.getElementById($("a[href='"+hashNow+"']").get(0).getAttribute('data-menuanchor'));
 		pnrScroll(el,hashNow,"resize");
 
+		if ( win.width() > 1280 ) {
+			$("#fullpage").addClass("height-corrective");
+		}
+
 	});
 
 	// window scroll event

@@ -7,7 +7,7 @@ var toAnimate = $('html, body');
 function showBandContent(hash) {
 	elId = $("a[href='#"+hash+"']").get(0).getAttribute('data-menuanchor');
 	$(".section-text").fadeOut();
-	$("#"+elId+" .section-text").fadeIn(1000);
+	$("#"+elId+" .section-text").fadeIn(1200);
 }
 
 // change hash and active element function
@@ -30,11 +30,11 @@ function pnrScroll(el,hash,eventType) {
 	if ( eventType == 'noFnAfter' || eventType == 'resize' ) {
 		toAnimate.animate({
 			scrollTop: offset
-			}, 500);
+			}, 1200);
 	} else {
 		toAnimate.animate({
 			scrollTop: offset
-			}, 500, changeHash(hash));
+			}, 1200, changeHash(hash));
 	}
 };
 

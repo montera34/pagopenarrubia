@@ -32,7 +32,7 @@ html, body {
 }
 .nav-menu {
 	margin: 22px 0;
-	font-family: Znikomit, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	text-transform: uppercase;
 }
 .nav-menu li {
@@ -53,7 +53,7 @@ html, body {
 	margin-left: -20px;
 }
 .nav-menu .active {
-	font-weight: bold;
+	font-weight: 700;
 }
 
 
@@ -66,7 +66,7 @@ html, body {
 	vertical-align: middle;
 }
 #pre .inner-bg {
-	background-color: rgba(0,0,0,0.35);
+	background-color: rgba(0,0,0,0.45);
 }
 .inner-bg {
 	min-height: 275px;

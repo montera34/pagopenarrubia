@@ -2,12 +2,13 @@ var win = $(window);
 var winHeight = win.height();
 var hashIni = location.hash;
 var toAnimate = $('html, body');
+//var toAnimate = $(window);
 
 // fadein current band and fadeout the rest
 function showBandContent(hash) {
 	elId = $("a[href='#"+hash+"']").get(0).getAttribute('data-menuanchor');
 	$(".section-text").fadeOut();
-	$("#"+elId+" .section-text").fadeIn(1200);
+	$("#"+elId+" .section-text").fadeIn(1400);
 }
 
 // change hash and active element function
@@ -28,13 +29,15 @@ function pnrScroll(el,hash,eventType) {
 	offset = elOffset + (elHeight /2) - (winHeight /2);
 	// animate
 	if ( eventType == 'noFnAfter' || eventType == 'resize' ) {
-		toAnimate.animate({
-			scrollTop: offset
-			}, 1200);
+//		toAnimate.animate({
+//			scrollTop: offset
+//			}, 1200);
+		toAnimate.scrollTo(offset,1200);
 	} else {
-		toAnimate.animate({
-			scrollTop: offset
-			}, 1200, changeHash(hash));
+//		toAnimate.animate({
+//			scrollTop: offset
+//			}, 1200, changeHash(hash));
+		toAnimate.scrollTo(offset,1200,{onAfter:changeHash(hash)});
 	}
 };
 

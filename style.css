@@ -27,17 +27,18 @@ html, body {
 	vertical-align: middle;
 }
 #brand {
-	height: 275px;
+	height: 270px;
 	background: transparent url(images/ppnr-logo.png) no-repeat center center/139px auto;
 }
 .nav-menu {
-	margin: 22px 0;
+	margin: 28px 0;
 	font-family: 'Open Sans', sans-serif;
 	text-transform: uppercase;
 }
 .nav-menu li {
-	margin: 12px 0;
+	margin: 10px 0;
 	white-space: nowrap;
+	line-height: 22px;
 }
 .nav-menu a:focus {
 	color: #fff !important;
@@ -48,8 +49,8 @@ html, body {
 	content: " ";
 	float: left;
 	width: 20px;
-	height: 20px;
-	background: transparent url(images/ppnr-icon.png) no-repeat 0px 2px;
+	height: 22px;
+	background: transparent url(images/ppnr-icon.png) no-repeat 0px 3px;
 	margin-left: -20px;
 }
 .nav-menu .active {
@@ -69,7 +70,7 @@ html, body {
 	background-color: rgba(0,0,0,0.45);
 }
 .inner-bg {
-	min-height: 275px;
+	min-height: 270px;
 }
 .section {
 	background-size: cover;
@@ -104,8 +105,30 @@ html, body {
 	column-count: 2;
 	-webkit-column-count: 2;
 	-moz-column-count: 2;
+	column-fill: auto;
+	-webkit-column-fill: auto;
+	-moz-column-fill: auto;
 	text-align: justify;
 }
 .section-text p {
-	margin: 0 0 1.4em;
+	line-height: 22px;
+	margin: 0;
+}
+.section-epi {
+	position: absolute;
+	bottom: 0;
+	right: 15px;
+	font-size: 0.8em;
+}
+.section-epi ul {
+	text-align: right;
+	margin: 0;
+}
+
+/* media queries */
+@media (min-width: 768px) {
+	.section-text { height: 220px; }
+}
+@media (min-width: 768px) and (max-width: 1199px) {
+	.nav-menu li { letter-spacing: -0.6px; }
 }

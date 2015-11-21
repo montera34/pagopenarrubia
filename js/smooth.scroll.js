@@ -7,8 +7,8 @@ var toAnimate = $('html, body');
 // fadein current band and fadeout the rest
 function showBandContent(hash) {
 	elId = $("a[href='#"+hash+"']").get(0).getAttribute('data-menuanchor');
-	$(".section-text").fadeOut();
-	$("#"+elId+" .section-text").fadeIn(1400);
+	$(".section-fade").fadeOut();
+	$("#"+elId+" .section-fade").fadeIn(1400);
 }
 
 // change hash and active element function
@@ -44,7 +44,7 @@ function pnrScroll(el,hash,eventType) {
 $(document).ready(function() {
 
 	// hide bands
-	$(".section-text").hide();
+	$(".section-fade").hide();
 
 	// Add margin to main container in huge screens
 	if ( win.width() > 1280 ) {

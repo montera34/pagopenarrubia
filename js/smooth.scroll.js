@@ -1,8 +1,8 @@
 var win = $(window);
 var winHeight = win.height();
 var hashIni = location.hash;
-var toAnimate = $('html, body');
 //var toAnimate = $(window);
+var toAnimate = $('html, body');
 
 // fadein current band and fadeout the rest
 function showBandContent(hash) {
@@ -41,7 +41,18 @@ function pnrScroll(el,hash,eventType) {
 	}
 };
 
+function pnrSetHeight(target) {
+	var winHeight = win.height();
+	$(target).css( "height", winHeight );
+	console.log(winHeight);
+}
+
 $(document).ready(function() {
+
+	// if max-width < 992px
+	if ( win.width() < 992 ) {
+		pnrSetHeight(".section");
+	}
 
 	// hide bands
 	$(".section-fade").hide();
@@ -80,6 +91,9 @@ $(document).ready(function() {
 
 		if ( win.width() > 1280 ) {
 			$("#fullpage").addClass("height-corrective");
+		}
+		if ( win.width() < 992 ) {
+			pnrSetHeight(".section");
 		}
 
 	});

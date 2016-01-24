@@ -138,10 +138,6 @@ html, body {
 #pre .inner-bg {
 	background-color: rgba(0,0,0,0.45);
 }
-.inner-bg {
-	/*min-height: 270px;*/
-	min-height: 356px;
-}
 .section {
 	background-size: cover;
 	padding: 0;
@@ -207,18 +203,75 @@ html, body {
 	right: 15px;
 	font-size: 0.8em;
 	text-align: right;
+	max-width: 45%;
 }
 .section-epi ul {
 	margin: 0;
 }
 
 /* media queries */
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 991px ) {
+	#pre { display: block; }
+	.pre-inner {
+		height: 100%;
+		display: block;
+	}
+	#pre .inner-bg {
+		height: 100%;
+		text-align: center;
+	}
+	.nav-menu {
+		margin: 28px 0 0 0;
+	}
+	.nav-menu li {
+		display: inline;
+		margin: 0 5px;
+	}
+	.nav-menu .active {
+		font-weight: normal;
+	}
+	.nav-menu .active::before {
+		background: none;
+	}
+	.nav-menu > .active > a:after,
+	.nav-menu > ul > li.active > a:after {
+	  bottom: 0px;
+	  height: 2px;
+	  width: 40px;
+	  margin-left: -20px;
+	  margin-top: -2px;
+	}
+	#lang { top: 75px }
+	#brand { height: 215px; }
+	.container-middle { vertical-align: bottom; }
+	.vspace { padding: 10px 0; }
+	.section-text {
+		line-height: 20px;
+		font-size: 15px;
+		column-count: 1;
+		-webkit-column-count: 1;
+		-moz-column-count: 1;
+	}
+
+}
+@media (min-width: 992px) and (max-width: 1199px ) {
+	.nav-menu li { letter-spacing: -0.6px; }
+	.section-text {
+		/*height: 264px;*/
+		height: 374px;
+	}
+	.inner-bg {
+		min-height: 424px;
+	}
+}
+@media (min-width: 1200px ) {
 	.section-text {
 		/*height: 264px;*/
 		height: 330px;
 	}
-}
-@media (min-width: 768px) and (max-width: 1199px) {
-	.nav-menu li { letter-spacing: -0.6px; }
+	.inner-bg {
+		/*min-height: 270px;*/
+		/*min-height: 356px;*/
+		min-height: 380px;
+	}
 }

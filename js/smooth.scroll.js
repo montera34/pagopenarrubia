@@ -50,6 +50,7 @@ function pnrSetHeight(target) {
 $(document).ready(function() {
 
 	// if max-width < 992px
+	//if ( win.width() < 992 && win.width() > 767 ) {
 	if ( win.width() < 992 ) {
 		pnrSetHeight(".section");
 	}
@@ -57,6 +58,7 @@ $(document).ready(function() {
 	// hide bands
 	$(".section-fade").hide();
 
+if ( win.width() > 767 ) {
 	// Add margin to main container in huge screens
 	if ( win.width() > 1280 ) {
 		$("#fullpage").addClass("height-corrective");
@@ -69,7 +71,7 @@ $(document).ready(function() {
 		hash = e.target.getAttribute('href');
 		pnrScroll(element,hash,"noFnAfter");
 	});
-
+}
 	// window load event
 	win.load(function() {
 		if ( hashIni == '' ) { hashIni = '#inicio'; }
@@ -77,6 +79,7 @@ $(document).ready(function() {
 		pnrScroll(element,hashIni);
 	});
 
+if ( win.width() > 767 ) {
 	// window resize event
 	$(window).resize(function() {
 		if(this.resizeTO) clearTimeout(this.resizeTO);
@@ -97,6 +100,7 @@ $(document).ready(function() {
 		}
 
 	});
+}
 
 	// window scroll event
 	win.scroll(function () {
@@ -134,6 +138,7 @@ $(document).ready(function() {
 		}
 	});
 
+if ( win.width() > 767 ) {
 	// mouse wheel events
 	$('html').on('mousewheel', function(event) {
 		// scroll down
@@ -184,5 +189,6 @@ $(document).ready(function() {
 		}
 		e.preventDefault(); // prevent the default action (scroll / move caret)
 	});
+} // end if win > 767
 
 });
